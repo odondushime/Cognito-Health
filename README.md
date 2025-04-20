@@ -1,52 +1,143 @@
-# Healthcare Data Analysis Platform
-A powerful platform for diving into anonymized healthcare data to uncover trends, built with secure, scalable pipelines that grow with your needs.
+# Healthcare Analytics API
 
-## What It Does
-- Spots unusual patterns in disease trends
-- Offers interactive charts and visualizations
-- Keeps data safe with HIPAA-compliant security
-- Handles large datasets with robust ETL pipelines
+A robust Flask-based API for healthcare data analytics and anomaly detection, featuring Azure integration, JWT authentication, and machine learning capabilities.
 
-## Tools & Tech
-- **Backend**: Python with Flask for lightweight APIs
-- **Frontend**: Vue.js for a smooth, dynamic interface
-- **Data Processing**: Apache Spark for heavy lifting
-- **AI**: TensorFlow for smart trend detection
-- **Cloud**: Azure, using Kubernetes and Blob Storage
-- **Database**: Azure Cosmos DB for flexible data storage
+## Features
 
-## How It’s Built
-![Pipeline Diagram](docs/pipeline.png)
-Data flows through a Spark-powered ETL pipeline, lands in Cosmos DB, and gets served up through Flask APIs for the frontend to display.
+- **Secure Authentication**: JWT-based authentication with refresh tokens
+- **Data Processing**: CSV file upload and processing with pandas and PySpark
+- **Anomaly Detection**: TensorFlow-based anomaly detection in healthcare data
+- **Dashboard Analytics**: Real-time healthcare trends and statistics
+- **Azure Integration**: Cosmos DB and Key Vault integration
+- **API Documentation**: Swagger/OpenAPI documentation
+- **Input Validation**: Robust data validation using Marshmallow
+- **Health Monitoring**: Health check endpoint for monitoring
 
-## Getting Started
-1. Grab the code: `git clone https://github.com/yourusername/healthcare-data-platform`
-2. Set up the backend: `pip install -r requirements.txt`
-3. Set up the frontend: `npm install` in the client folder
-4. Add your Azure credentials to a `.env` file
-5. Kick off Spark jobs: `spark-submit spark_jobs/etl.py`
-6. Launch the app: `flask run`
-7. Check it out at: `http://localhost:8080`
+## Prerequisites
 
-## How to Use It
-- Upload your datasets at `/data/upload`
-- Explore trends on the `/dashboard`
-- Dig into anomalies at `/analytics`
+- Python 3.8+
+- Azure account with Cosmos DB and Key Vault
+- Spark (for local development)
 
-## Keeping It Secure
-- Data’s locked down with Azure Key Vault encryption
-- Role-based access control (RBAC) keeps things tight
-- APIs run over HTTPS for safe communication
+## Installation
 
-## Testing
-Run `pytest tests/` to check the APIs and data pipelines.
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/healthcare-analytics.git
+cd healthcare-analytics
+```
+
+2. Create and activate a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Set up environment variables:
+
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+## Configuration
+
+The application uses the following environment variables:
+
+- `FLASK_SECRET_KEY`: Secret key for Flask
+- `JWT_SECRET_KEY`: Secret key for JWT tokens
+- `AZURE_COSMOS_ENDPOINT`: Azure Cosmos DB endpoint
+- `AZURE_COSMOS_KEY`: Azure Cosmos DB key
+- `AZURE_KEY_VAULT_URI`: Azure Key Vault URI
+- `CORS_ORIGINS`: Allowed CORS origins
+- `LOG_LEVEL`: Logging level
+
+## Running the Application
+
+1. Start the Flask development server:
+
+```bash
+python app.py
+```
+
+2. Access the API documentation at:
+
+```
+http://localhost:8080/
+```
+
+## API Endpoints
+
+### Authentication
+
+- `POST /auth/login`: User login and token generation
+
+### Data Management
+
+- `POST /data/upload`: Upload and process healthcare data
+- `GET /dashboard`: Get healthcare dashboard trends
+- `GET /analytics/anomalies`: Detect anomalies in recent data
+
+### System
+
+- `GET /health`: Check API health status
+
+## Security
+
+- JWT-based authentication
+- Role-based access control
+- Input validation
+- Secure file handling
+- CORS protection
+
+## Development
+
+### Code Style
+
+The project uses Black for code formatting and Flake8 for linting:
+
+```bash
+black .
+flake8
+```
+
+### Testing
+
+Run tests using pytest:
+
+```bash
+pytest
+```
 
 ## Deployment
-Automated testing and deployment through Azure DevOps—see `.github/workflows/ci.yml` for details.
 
-## What’s Next
-- Let users ask questions in plain English
-- Tune Spark jobs to crunch even bigger datasets
+For production deployment:
+
+1. Set `FLASK_ENV=production` in `.env`
+2. Configure proper CORS origins
+3. Set up proper logging
+4. Use a production-grade WSGI server (e.g., Gunicorn)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-Built by Odon Dushime. Let’s connect on LinkedIn: www.linkedin.com/in/odon-dushime-276b9b271
+
+Built by Odon Dushime. Let's connect on LinkedIn: www.linkedin.com/in/odon-dushime-276b9b271
